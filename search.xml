@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>WebSocket前后端消息推送-DEMO</title>
+    <url>/2020/03/09/%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>WebSocket协议，客户端和服务端都可以主动的推送消息，可以是文本也可以是二进制数据。而且没有同源策略的限制，不存在跨域问题。协议的标识符就是ws。像https一样如果加密的话就是wxs。</p>
+<a id="more"></a>
+<p>代码经过实战：<a href="https://gitee.com/pandagit3/demo" target="_blank" rel="noopener">GIT地址</a></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>webSocket</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/02/14/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<a id="more"></a>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>启动脚本.sh</title>
+    <url>/2020/03/02/%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC-sh-1/</url>
+    <content><![CDATA[<p>启动，状态查看，停止，重启</p>
+<a id="more"></a>
+<h2 id="脚本1"><a href="#脚本1" class="headerlink" title="脚本1"></a>脚本1</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh  </span><br><span class="line">d&#x3D;&#96;date &#39;+%Y%m%d%H%M%S&#39;&#96;</span><br><span class="line">nohup java -Xdebug -Xrunjdwp:server&#x3D;y,transport&#x3D;dt_socket,address&#x3D;0.0.0.0:34567,suspend&#x3D;n \</span><br><span class="line">	-server -Xss256k -Xmx3072m -XX:MetaspaceSize&#x3D;512m -XX:MaxMetaspaceSize&#x3D;1024m  \</span><br><span class="line">	-verbose:gc -Xloggc:.&#x2F;gc-$d.log -XX:+PrintGCDetails -XX:-PrintGCTimeStamps -XX:+UseG1GC \</span><br><span class="line">	org.springframework.boot.loader.WarLauncher \</span><br><span class="line">	 &gt;szgd-$d.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<h2 id="脚本2"><a href="#脚本2" class="headerlink" title="脚本2"></a>脚本2</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/usr/local/jdk1.8.0_211</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash">这里可替换为你自己的执行程序，其他代码无需更改</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> APP_NAME=/usr/<span class="built_in">local</span>/spring-cloud/eureka/eureka-service-0.0.1-SNAPSHOT.jar</span></span><br><span class="line">APP_NAME=/opt/app/movie.jar</span><br><span class="line"><span class="meta">#</span><span class="bash">使用说明，用来提示输入参数</span></span><br><span class="line">usage() &#123;</span><br><span class="line">    echo "Usage: sh shell-eureka-service.sh [start|stop|restart|status]"</span><br><span class="line">    exit 1</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash">检查程序是否在运行</span></span><br><span class="line">is_exist()&#123;</span><br><span class="line">  pid=`ps -ef|grep $APP_NAME|grep -v grep|awk '&#123;print $2&#125;'`</span><br><span class="line"><span class="meta">  #</span><span class="bash">如果不存在返回1，存在返回0     </span></span><br><span class="line">  if [ -z "$&#123;pid&#125;" ]; then</span><br><span class="line">   return 1</span><br><span class="line">  else</span><br><span class="line">    return 0</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash">启动方法</span></span><br><span class="line">start()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo "$&#123;APP_NAME&#125; is already running. pid=$&#123;pid&#125;"</span><br><span class="line">  else</span><br><span class="line">    nohup java -jar $&#123;APP_NAME&#125;  &gt;start.log 2&gt;&amp;1 &amp;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash">停止方法</span></span><br><span class="line">stop()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  if [ $? -eq "0" ]; then</span><br><span class="line">    kill -9 $pid</span><br><span class="line">  else</span><br><span class="line">    echo "$&#123;APP_NAME&#125; is not running"</span><br><span class="line">  fi  </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash">输出运行状态</span></span><br><span class="line">status()&#123;</span><br><span class="line">  is_exist</span><br><span class="line">  if [ $? -eq "0" ]; then</span><br><span class="line">    echo "$&#123;APP_NAME&#125; is running. Pid is $&#123;pid&#125;"</span><br><span class="line">  else</span><br><span class="line">    echo "$&#123;APP_NAME&#125; is NOT running."</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash">重启</span></span><br><span class="line">restart()&#123;</span><br><span class="line">  stop</span><br><span class="line">  sleep 5</span><br><span class="line">  start</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash">根据输入参数，选择执行对应方法，不输入则执行使用说明</span></span><br><span class="line">case "$1" in</span><br><span class="line">  "start")</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">  "stop")</span><br><span class="line">    stop</span><br><span class="line">    ;;</span><br><span class="line">  "status")</span><br><span class="line">    status</span><br><span class="line">    ;;</span><br><span class="line">  "restart")</span><br><span class="line">    restart</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    usage</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<p>使用   ./ xxx.sh  stop</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+</search>
