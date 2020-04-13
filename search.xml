@@ -53,7 +53,8 @@
   <entry>
     <title>Mysql 批量添加时主键冲突的问题解决方案</title>
     <url>/2020/04/13/Mysql-%E6%89%B9%E9%87%8F%E6%B7%BB%E5%8A%A0%E6%97%B6%E4%B8%BB%E9%94%AE%E5%86%B2%E7%AA%81%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
-    <content><![CDATA[<h2 id="Mysql-批量添加时主键冲突的问题解决方案"><a href="#Mysql-批量添加时主键冲突的问题解决方案" class="headerlink" title="Mysql 批量添加时主键冲突的问题解决方案"></a>Mysql 批量添加时主键冲突的问题解决方案</h2><h4 id="1、ignore关键字-直接跳过"><a href="#1、ignore关键字-直接跳过" class="headerlink" title="1、ignore关键字 直接跳过"></a>1、ignore关键字 直接跳过</h4><p>插入数据已经出现在DB中，因此在出现冲突的时候我们可以选择直接跳过，把能插入的插入就好。使用ignore</p>
+    <content><![CDATA[<a id="more"></a>
+<h4 id="1、ignore关键字-直接跳过"><a href="#1、ignore关键字-直接跳过" class="headerlink" title="1、ignore关键字 直接跳过"></a>1、ignore关键字 直接跳过</h4><p>插入数据已经出现在DB中，因此在出现冲突的时候我们可以选择直接跳过，把能插入的插入就好。使用ignore</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">insert ignore into <span class="title">table</span> <span class="params">(x,x,x,x)</span> <span class="title">values</span><span class="params">(x,x,x,x)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <h4 id="2、Replace-into新数据更换旧数据"><a href="#2、Replace-into新数据更换旧数据" class="headerlink" title="2、Replace into新数据更换旧数据"></a>2、Replace into新数据更换旧数据</h4><p>新数据替换旧数据</p>
@@ -73,7 +74,9 @@
   <entry>
     <title>Oracle递归函数</title>
     <url>/2020/04/13/Oracle%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h3 id="Oracle递归函数"><a href="#Oracle递归函数" class="headerlink" title="Oracle递归函数"></a>Oracle递归函数</h3><p>言归正传所谓递归查询那么数据表中数据的结构应该是符合递归查询的基本条件，即表中有ID,PID（节点编号、父节点编号）如果把数据以UI的方式展现出来应该是一棵或多棵树了。</p>
+    <content><![CDATA[<p>言归正传所谓递归查询那么数据表中数据的结构应该是符合递归查询的基本条件，即表中有ID,PID（节点编号、父节点编号）如果把数据以UI的方式展现出来应该是一棵或多棵树了。</p>
+<a id="more"></a>
+
 <p>我们要以其中一个节点去递归查询出这个节点子节点或父节点的过程就是我们所要说明的</p>
 <p><strong>基本语法</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select ... from tablename where 条件4 start with 条件1 connect by 条件2 AND 条件3</span><br></pre></td></tr></table></figure>
