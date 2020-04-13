@@ -63,5 +63,36 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">insert into `user` (`id`, `name`, `create_at`, `update_at`) values (<span class="number">1</span>, <span class="string">'test0'</span>, <span class="string">'2018-07-10 18:54:00'</span>, <span class="string">'2018-07-10 18:54:52'</span>) ON DUPLICATE KEY UPDATE `update_at`=<span class="string">'2018-07-10 19:58:05'</span>;</span><br></pre></td></tr></table></figure>
 <p>插入中，当冲突时，我们只更新update_at字段，而name的test0没有更新</p>
 ]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle递归函数</title>
+    <url>/2020/04/13/Oracle%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="Oracle递归函数"><a href="#Oracle递归函数" class="headerlink" title="Oracle递归函数"></a>Oracle递归函数</h3><p>言归正传所谓递归查询那么数据表中数据的结构应该是符合递归查询的基本条件，即表中有ID,PID（节点编号、父节点编号）如果把数据以UI的方式展现出来应该是一棵或多棵树了。</p>
+<p>我们要以其中一个节点去递归查询出这个节点子节点或父节点的过程就是我们所要说明的</p>
+<p><strong>基本语法</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select ... from tablename where 条件4 start with 条件1 connect by 条件2 AND 条件3</span><br></pre></td></tr></table></figure>
+<p><strong>解析</strong></p>
+<p>条件1<br>     是根结点的限定语句，当然可以放宽限定条件，以取得多个根结点，实际就是多棵树。<br>条件2<br>      是连接条件，其中用PRIOR表示上一条记录，比如 CONNECT BY PRIOR org_id = parent_id就是说上一条记录的org_id 是本条记录的parent_id，即本记录的父亲是上一条记录。<br>条件4<br>      是过滤条件，用于对返回的所有记录进行过滤。</p>
+<p><strong>试着理解</strong></p>
+<h6 id="eg"><a href="#eg" class="headerlink" title="eg:"></a>eg:</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> select * from table</span><br><span class="line"> start with org_id &#x3D; &#39;HBHqfWGWPy&#39;</span><br><span class="line"> connect by prior org_id &#x3D; parent_id;</span><br></pre></td></tr></table></figure>
+<p>简单说来是将一个树状结构存储在一张表里，比如一个表中存在两个字段:<br> org_id,parent_id那么通过表示每一条记录的parent是谁，就可以形成一个树状结构。</p>
+<p><em>优秀案例推荐:</em> <a href="https://www.linuxidc.com/Linux/2013-06/85879.htm" target="_blank" rel="noopener">Oracle 递归查询</a></p>
+<p>项目中实际应用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT </span><br><span class="line">DISTINCT(A.ID),A.CATEGORY_ID,A.PARENT_CODE,A.NAME,A.CODE,A.SORT,B.NAME AS </span><br><span class="line">pName,CASE WHEN b.CODE IS NULL THEN &#39;614234E9C4DC41D19EAFFA6BB2613D55&#39; ELSE b.CODE </span><br><span class="line">END AS pCode,A.STATE,A.CREATED_BY,A.CREATION_DATE,A.LAST_UPDATED_BY,A.LAST_UPDATE_DATE FROM </span><br><span class="line">DICTIONARY ALEFT JOIN DICTIONARY B ON A.PARENT_CODE &#x3D; B.CODE AND B.CATEGORY_ID &#x3D; </span><br><span class="line">#&#123;categoryId, jdbcType&#x3D;NUMERIC&#125;WHERE A.STATE &#x3D; 0 AND A.CATEGORY_ID &#x3D; #&#123;categoryId, jdbcType&#x3D;NUMERIC&#125;START WITH A.NAME LIKE CONCAT(CONCAT(&#39;%&#39;, #&#123;name, jdbcType&#x3D;VARCHAR&#125;), &#39;%&#39;)CONNECT BY PRIOR A.PARENT_CODE &#x3D; A.CODE ORDER BY CODE ASC</span><br></pre></td></tr></table></figure>
+<p>自行理解吧</p>
+<p>参考文章地址：<a href="https://www.linuxidc.com/Linux/2014-06/102687.htm" target="_blank" rel="noopener">Oracle递归函数</a></p>
+]]></content>
+      <categories>
+        <category>oracle</category>
+      </categories>
+      <tags>
+        <tag>oracle</tag>
+      </tags>
   </entry>
 </search>
