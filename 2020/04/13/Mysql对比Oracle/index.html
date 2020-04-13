@@ -20,19 +20,21 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+  <meta name="description" content="在开发过程中，要求代码做到兼容数据库，因此在mapper.xml中对于不兼容的sql，创建了两套sql执行，替换过程中需要注意的函数。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/02/14/hello-world/index.html">
+<meta property="og:title" content="Mysql对比Oracle">
+<meta property="og:url" content="http://yoursite.com/2020/04/13/Mysql%E5%AF%B9%E6%AF%94Oracle/index.html">
 <meta property="og:site_name" content="Barry&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="在开发过程中，要求代码做到兼容数据库，因此在mapper.xml中对于不兼容的sql，创建了两套sql执行，替换过程中需要注意的函数。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-02-14T15:30:25.000Z">
-<meta property="article:modified_time" content="2020-02-14T15:30:31.828Z">
+<meta property="article:published_time" content="2020-04-13T08:26:00.000Z">
+<meta property="article:modified_time" content="2020-04-13T08:29:20.866Z">
 <meta property="article:author" content="Barry.Wang">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="oracle">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/02/14/hello-world/">
+<link rel="canonical" href="http://yoursite.com/2020/04/13/Mysql%E5%AF%B9%E6%AF%94Oracle/">
 
 
 <script id="page-configurations">
@@ -44,7 +46,7 @@
   };
 </script>
 
-  <title>Hello World | Barry's Blog</title>
+  <title>Mysql对比Oracle | Barry's Blog</title>
   
 
 
@@ -186,7 +188,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/14/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/13/Mysql%E5%AF%B9%E6%AF%94Oracle/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -199,7 +201,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          Mysql对比Oracle
         </h1>
 
         <div class="post-meta">
@@ -210,7 +212,24 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-14 23:30:25 / 修改时间：23:30:31" itemprop="dateCreated datePublished" datetime="2020-02-14T23:30:25+08:00">2020-02-14</time>
+              <time title="创建时间：2020-04-13 16:26:00 / 修改时间：16:29:20" itemprop="dateCreated datePublished" datetime="2020-04-13T16:26:00+08:00">2020-04-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/oracle/" itemprop="url" rel="index">
+                    <span itemprop="name">oracle</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/oracle/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
             </span>
 
           <br>
@@ -219,7 +238,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>357</span>
+              <span>978</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -238,20 +257,75 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+        <p>在开发过程中，要求代码做到兼容数据库，因此在mapper.xml中对于不兼容的sql，创建了两套sql执行，替换过程中需要注意的函数。</p>
 <a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h3 id="函数区别："><a href="#函数区别：" class="headerlink" title="函数区别："></a>函数区别：</h3><table>
+<thead>
+<tr>
+<th>ORACLE</th>
+<th>mysql</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ceil(-1.001))</td>
+<td>ceiling(-1.001)</td>
+</tr>
+<tr>
+<td>SUBSTR(‘abcd’,2,2)</td>
+<td>substring(‘abcd’,2,2)</td>
+</tr>
+<tr>
+<td>instr(‘abcdefg’,’ab’)</td>
+<td>locate(‘ab’,’abcdefg’) //注意换位置  是否包含某字符串 返回的是字符串的位置</td>
+</tr>
+<tr>
+<td>length（str）</td>
+<td>char_length()</td>
+</tr>
+<tr>
+<td>concat (concat (X,x),x)</td>
+<td>concat (x,x,x)</td>
+</tr>
+<tr>
+<td>to_char(sysdate,’yyyy-mm-dd’)</td>
+<td>date_format(now(),’%Y-%m-%d’)</td>
+</tr>
+<tr>
+<td>to_char(sysdate,’hh24-mi-ss’)</td>
+<td>time_format(now(),’%H-%i-%S’)</td>
+</tr>
+<tr>
+<td>to_date(str,format)</td>
+<td>STR_TO_DATE(str,format)</td>
+</tr>
+<tr>
+<td>DECODE(iv_sr_status,g_sr_status_com, ld_sys_date, NULL)</td>
+<td>IF(exp1,exp2,exp3)/case when then…</td>
+</tr>
+<tr>
+<td>nvl(u.email_address, 10)</td>
+<td>IFNULL(u.email_address, 10)/ISNULL(u.email_address)</td>
+</tr>
+<tr>
+<td>trunc(-1.002)</td>
+<td>cast(-1.002 as SIGNED)</td>
+</tr>
+<tr>
+<td>TO_NUMBER(“123”)</td>
+<td>CAST(“123” AS SIGNED INTEGER)</td>
+</tr>
+<tr>
+<td>SYSDATE</td>
+<td>now()/SYSDATE()</td>
+</tr>
+<tr>
+<td>regexp_like(‘aaa’,expr)</td>
+<td>aaa’ regexp expr</td>
+</tr>
+</tbody></table>
+<h3 id="语句："><a href="#语句：" class="headerlink" title="语句："></a>语句：</h3><h4 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h4><pre><code>IF .. THEN..ELSIF ..THEN..END IF;            IF .. THEN..ELSEIF ..THEN..END IF;</code></pre><h3 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h3><pre><code>1. oracle使用For语句实现循环. Mysql使用Loop语句实现循环. 
+2. oracle 使用For…loop关键字. Mysql使用loopLable:LOOP实现循环.</code></pre><h3 id="while语句"><a href="#while语句" class="headerlink" title="while语句"></a>while语句</h3><pre><code>1. oracle 中使用while语句关键字为: while 表达式 loop… end loop;
+   mysql 中使用while语句关键字为: while 表达式 do… end while;</code></pre><p><a href="https://blog.csdn.net/qq_42239765/article/details/82842790" target="_blank" rel="noopener">参考文章</a></p>
 
     </div>
 
@@ -273,7 +347,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2020/02/14/hello-world/" title="Hello World">http://yoursite.com/2020/02/14/hello-world/</a>
+    <a href="http://yoursite.com/2020/04/13/Mysql%E5%AF%B9%E6%AF%94Oracle/" title="Mysql对比Oracle">http://yoursite.com/2020/04/13/Mysql对比Oracle/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -283,16 +357,24 @@
 
 
       <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
+              <a href="/tags/oracle/" rel="tag"><i class="fa fa-tag"></i> oracle</a>
+          </div>
 
         
 
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/03/02/%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC-sh-1/" rel="next" title="启动脚本.sh">
-      启动脚本.sh <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/13/Oracle%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/" rel="prev" title="Oracle递归函数">
+      <i class="fa fa-chevron-left"></i> Oracle递归函数
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/13/Oracle%E5%88%86%E6%9E%90%E5%87%BD%E6%95%B0over%EF%BC%88%EF%BC%89/" rel="next" title="Oracle分析函数over（）">
+      Oracle分析函数over（） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -353,7 +435,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数区别："><span class="nav-number">1.</span> <span class="nav-text">函数区别：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语句："><span class="nav-number">2.</span> <span class="nav-text">语句：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if语句"><span class="nav-number">2.1.</span> <span class="nav-text">if语句</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for语句"><span class="nav-number">3.</span> <span class="nav-text">for语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while语句"><span class="nav-number">4.</span> <span class="nav-text">while语句</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

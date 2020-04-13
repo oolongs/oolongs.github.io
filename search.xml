@@ -1,17 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>WebSocket前后端消息推送-DEMO</title>
-    <url>/2020/03/09/%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p>WebSocket协议，客户端和服务端都可以主动的推送消息，可以是文本也可以是二进制数据。而且没有同源策略的限制，不存在跨域问题。协议的标识符就是ws。像https一样如果加密的话就是wxs。</p>
+    <title>Mysql 批量添加时主键冲突的问题解决方案</title>
+    <url>/2020/04/13/Mysql-%E6%89%B9%E9%87%8F%E6%B7%BB%E5%8A%A0%E6%97%B6%E4%B8%BB%E9%94%AE%E5%86%B2%E7%AA%81%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<p>三种解决方案推荐</p>
 <a id="more"></a>
-<p>代码经过实战：<a href="https://gitee.com/pandagit3/demo" target="_blank" rel="noopener">GIT地址</a></p>
+<h4 id="1、ignore关键字-直接跳过"><a href="#1、ignore关键字-直接跳过" class="headerlink" title="1、ignore关键字 直接跳过"></a>1、ignore关键字 直接跳过</h4><p>插入数据已经出现在DB中，因此在出现冲突的时候我们可以选择直接跳过，把能插入的插入就好。使用ignore</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">insert ignore into <span class="title">table</span> <span class="params">(x,x,x,x)</span> <span class="title">values</span><span class="params">(x,x,x,x)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、Replace-into新数据更换旧数据"><a href="#2、Replace-into新数据更换旧数据" class="headerlink" title="2、Replace into新数据更换旧数据"></a>2、Replace into新数据更换旧数据</h4><p>新数据替换旧数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">replace into `user` (X,X,X,X) VALUES(X,X,X,X)</span><br></pre></td></tr></table></figure>
+<p>–实际过程是删除冲突数据 插入新的数据</p>
+<h4 id="3，ON-DUPLICATE-KEY-UPDATE-直接更新旧数据"><a href="#3，ON-DUPLICATE-KEY-UPDATE-直接更新旧数据" class="headerlink" title="3，ON DUPLICATE KEY UPDATE 直接更新旧数据"></a>3，ON DUPLICATE KEY UPDATE 直接更新旧数据</h4><p>出现冲突时候只是更新部分指定数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">insert into `user` (`id`, `name`, `create_at`, `update_at`) values (<span class="number">1</span>, <span class="string">'test0'</span>, <span class="string">'2018-07-10 18:54:00'</span>, <span class="string">'2018-07-10 18:54:52'</span>) ON DUPLICATE KEY UPDATE `update_at`=<span class="string">'2018-07-10 19:58:05'</span>;</span><br></pre></td></tr></table></figure>
+<p>插入中，当冲突时，我们只更新update_at字段，而name的test0没有更新</p>
 ]]></content>
       <categories>
-        <category>java</category>
+        <category>mysql</category>
       </categories>
       <tags>
-        <tag>webSocket</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mysql对比Oracle</title>
+    <url>/2020/04/13/Mysql%E5%AF%B9%E6%AF%94Oracle/</url>
+    <content><![CDATA[<p>在开发过程中，要求代码做到兼容数据库，因此在mapper.xml中对于不兼容的sql，创建了两套sql执行，替换过程中需要注意的函数。</p>
+<a id="more"></a>
+<h3 id="函数区别："><a href="#函数区别：" class="headerlink" title="函数区别："></a>函数区别：</h3><table>
+<thead>
+<tr>
+<th>ORACLE</th>
+<th>mysql</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ceil(-1.001))</td>
+<td>ceiling(-1.001)</td>
+</tr>
+<tr>
+<td>SUBSTR(‘abcd’,2,2)</td>
+<td>substring(‘abcd’,2,2)</td>
+</tr>
+<tr>
+<td>instr(‘abcdefg’,’ab’)</td>
+<td>locate(‘ab’,’abcdefg’) //注意换位置  是否包含某字符串 返回的是字符串的位置</td>
+</tr>
+<tr>
+<td>length（str）</td>
+<td>char_length()</td>
+</tr>
+<tr>
+<td>concat (concat (X,x),x)</td>
+<td>concat (x,x,x)</td>
+</tr>
+<tr>
+<td>to_char(sysdate,’yyyy-mm-dd’)</td>
+<td>date_format(now(),’%Y-%m-%d’)</td>
+</tr>
+<tr>
+<td>to_char(sysdate,’hh24-mi-ss’)</td>
+<td>time_format(now(),’%H-%i-%S’)</td>
+</tr>
+<tr>
+<td>to_date(str,format)</td>
+<td>STR_TO_DATE(str,format)</td>
+</tr>
+<tr>
+<td>DECODE(iv_sr_status,g_sr_status_com, ld_sys_date, NULL)</td>
+<td>IF(exp1,exp2,exp3)/case when then…</td>
+</tr>
+<tr>
+<td>nvl(u.email_address, 10)</td>
+<td>IFNULL(u.email_address, 10)/ISNULL(u.email_address)</td>
+</tr>
+<tr>
+<td>trunc(-1.002)</td>
+<td>cast(-1.002 as SIGNED)</td>
+</tr>
+<tr>
+<td>TO_NUMBER(“123”)</td>
+<td>CAST(“123” AS SIGNED INTEGER)</td>
+</tr>
+<tr>
+<td>SYSDATE</td>
+<td>now()/SYSDATE()</td>
+</tr>
+<tr>
+<td>regexp_like(‘aaa’,expr)</td>
+<td>aaa’ regexp expr</td>
+</tr>
+</tbody></table>
+<h3 id="语句："><a href="#语句：" class="headerlink" title="语句："></a>语句：</h3><h4 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h4><pre><code>IF .. THEN..ELSIF ..THEN..END IF;            IF .. THEN..ELSEIF ..THEN..END IF;</code></pre><h3 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h3><pre><code>1. oracle使用For语句实现循环. Mysql使用Loop语句实现循环. 
+2. oracle 使用For…loop关键字. Mysql使用loopLable:LOOP实现循环.</code></pre><h3 id="while语句"><a href="#while语句" class="headerlink" title="while语句"></a>while语句</h3><pre><code>1. oracle 中使用while语句关键字为: while 表达式 loop… end loop;
+   mysql 中使用while语句关键字为: while 表达式 do… end while;</code></pre><p><a href="https://blog.csdn.net/qq_42239765/article/details/82842790" target="_blank" rel="noopener">参考文章</a></p>
+]]></content>
+      <categories>
+        <category>oracle</category>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle分析函数over（）</title>
+    <url>/2020/04/13/Oracle%E5%88%86%E6%9E%90%E5%87%BD%E6%95%B0over%EF%BC%88%EF%BC%89/</url>
+    <content><![CDATA[<h2 id="分析"><a href="#分析" class="headerlink" title="分析:"></a>分析:</h2><p>Oracle从8.1.6开始提供分析函数，分析函数用于计算基于组的某种聚合值，它和聚合函数的不同之处是<br>对于每个组返回多行，而聚合函数对于每个组只返回一行。</p>
+<p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">over(partation by clume order by clume)</span><br></pre></td></tr></table></figure>
+<p>单独使用order by 可以实现累加</p>
+<p><a href="https://www.cnblogs.com/dongyj/p/5992083.html" target="_blank" rel="noopener">参考文章①</a><br><a href="https://www.cnblogs.com/haoshuai1950/p/5160449.html" target="_blank" rel="noopener">参考文章②</a></p>
+]]></content>
+      <categories>
+        <category>oracle</category>
+      </categories>
+      <tags>
+        <tag>oracle</tag>
       </tags>
   </entry>
   <entry>
@@ -51,27 +157,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Mysql 批量添加时主键冲突的问题解决方案</title>
-    <url>/2020/04/13/Mysql-%E6%89%B9%E9%87%8F%E6%B7%BB%E5%8A%A0%E6%97%B6%E4%B8%BB%E9%94%AE%E5%86%B2%E7%AA%81%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
-    <content><![CDATA[<a id="more"></a>
-<h4 id="1、ignore关键字-直接跳过"><a href="#1、ignore关键字-直接跳过" class="headerlink" title="1、ignore关键字 直接跳过"></a>1、ignore关键字 直接跳过</h4><p>插入数据已经出现在DB中，因此在出现冲突的时候我们可以选择直接跳过，把能插入的插入就好。使用ignore</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">insert ignore into <span class="title">table</span> <span class="params">(x,x,x,x)</span> <span class="title">values</span><span class="params">(x,x,x,x)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2、Replace-into新数据更换旧数据"><a href="#2、Replace-into新数据更换旧数据" class="headerlink" title="2、Replace into新数据更换旧数据"></a>2、Replace into新数据更换旧数据</h4><p>新数据替换旧数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">replace into `user` (X,X,X,X) VALUES(X,X,X,X)</span><br></pre></td></tr></table></figure>
-<p>–实际过程是删除冲突数据 插入新的数据</p>
-<h4 id="3，ON-DUPLICATE-KEY-UPDATE-直接更新旧数据"><a href="#3，ON-DUPLICATE-KEY-UPDATE-直接更新旧数据" class="headerlink" title="3，ON DUPLICATE KEY UPDATE 直接更新旧数据"></a>3，ON DUPLICATE KEY UPDATE 直接更新旧数据</h4><p>出现冲突时候只是更新部分指定数据</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">insert into `user` (`id`, `name`, `create_at`, `update_at`) values (<span class="number">1</span>, <span class="string">'test0'</span>, <span class="string">'2018-07-10 18:54:00'</span>, <span class="string">'2018-07-10 18:54:52'</span>) ON DUPLICATE KEY UPDATE `update_at`=<span class="string">'2018-07-10 19:58:05'</span>;</span><br></pre></td></tr></table></figure>
-<p>插入中，当冲突时，我们只更新update_at字段，而name的test0没有更新</p>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Oracle递归函数</title>
     <url>/2020/04/13/Oracle%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0/</url>
     <content><![CDATA[<p>言归正传所谓递归查询那么数据表中数据的结构应该是符合递归查询的基本条件，即表中有ID,PID（节点编号、父节点编号）如果把数据以UI的方式展现出来应该是一棵或多棵树了。</p>
@@ -96,6 +181,20 @@
       </categories>
       <tags>
         <tag>oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>WebSocket前后端消息推送-DEMO</title>
+    <url>/2020/03/09/%E7%AB%AF%E5%8F%A3%E8%BF%9B%E7%A8%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>WebSocket协议，客户端和服务端都可以主动的推送消息，可以是文本也可以是二进制数据。而且没有同源策略的限制，不存在跨域问题。协议的标识符就是ws。像https一样如果加密的话就是wxs。</p>
+<a id="more"></a>
+<p>代码经过实战：<a href="https://gitee.com/pandagit3/demo" target="_blank" rel="noopener">GIT地址</a></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>webSocket</tag>
       </tags>
   </entry>
 </search>
