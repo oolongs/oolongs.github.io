@@ -50,4 +50,18 @@
         <tag>shell</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Mysql 批量添加时主键冲突的问题解决方案</title>
+    <url>/2020/04/13/Mysql-%E6%89%B9%E9%87%8F%E6%B7%BB%E5%8A%A0%E6%97%B6%E4%B8%BB%E9%94%AE%E5%86%B2%E7%AA%81%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<h2 id="Mysql-批量添加时主键冲突的问题解决方案"><a href="#Mysql-批量添加时主键冲突的问题解决方案" class="headerlink" title="Mysql 批量添加时主键冲突的问题解决方案"></a>Mysql 批量添加时主键冲突的问题解决方案</h2><h4 id="1、ignore关键字-直接跳过"><a href="#1、ignore关键字-直接跳过" class="headerlink" title="1、ignore关键字 直接跳过"></a>1、ignore关键字 直接跳过</h4><p>插入数据已经出现在DB中，因此在出现冲突的时候我们可以选择直接跳过，把能插入的插入就好。使用ignore</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">insert ignore into <span class="title">table</span> <span class="params">(x,x,x,x)</span> <span class="title">values</span><span class="params">(x,x,x,x)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、Replace-into新数据更换旧数据"><a href="#2、Replace-into新数据更换旧数据" class="headerlink" title="2、Replace into新数据更换旧数据"></a>2、Replace into新数据更换旧数据</h4><p>新数据替换旧数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">replace into `user` (X,X,X,X) VALUES(X,X,X,X)</span><br></pre></td></tr></table></figure>
+<p>–实际过程是删除冲突数据 插入新的数据</p>
+<h4 id="3，ON-DUPLICATE-KEY-UPDATE-直接更新旧数据"><a href="#3，ON-DUPLICATE-KEY-UPDATE-直接更新旧数据" class="headerlink" title="3，ON DUPLICATE KEY UPDATE 直接更新旧数据"></a>3，ON DUPLICATE KEY UPDATE 直接更新旧数据</h4><p>出现冲突时候只是更新部分指定数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">insert into `user` (`id`, `name`, `create_at`, `update_at`) values (<span class="number">1</span>, <span class="string">'test0'</span>, <span class="string">'2018-07-10 18:54:00'</span>, <span class="string">'2018-07-10 18:54:52'</span>) ON DUPLICATE KEY UPDATE `update_at`=<span class="string">'2018-07-10 19:58:05'</span>;</span><br></pre></td></tr></table></figure>
+<p>插入中，当冲突时，我们只更新update_at字段，而name的test0没有更新</p>
+]]></content>
+  </entry>
 </search>
